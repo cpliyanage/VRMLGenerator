@@ -7,10 +7,12 @@ import java.io.UnsupportedEncodingException;
 
 public class CodeGenerator {
 	//ObjectIdentifier objectIdentifier= new ObjectIdentifier();
+	
 	//Basic shapes
-	public void drawBox(String colour) throws IOException{
+	public void drawBox(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
+		attributes.initializeSizes("box");
 		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
 		//writer.println("#VRML V2.0 utf8");
 		ObjectIdentifier.writer.println("Transform {"+
@@ -23,21 +25,20 @@ public class CodeGenerator {
 				" }"+
 			    "}"+
 			    "geometry Box {"+
-				"size 2.0 2.0 2.0"+
+			    attributes.sizeTable.get(size)+
 			    "}"+
 			"}"+
 		    "]"+
 		"}");
-	
-	    //writer.close();
+		//writer.close();
 		 System.out.println("Box drawn successfully!");	
 	}
 	
-	public void drawSphere(String colour) throws IOException{
+	public void drawSphere(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
-		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
-		//writer.println("#VRML V2.0 utf8");
+		attributes.initializeSizes("sphere");
+
 		ObjectIdentifier.writer.println("Transform {"+
 		    "translation 0.0 0.615 0.0"+
 		    "children ["+
@@ -48,21 +49,20 @@ public class CodeGenerator {
 				" }"+
 			    "}"+
 			    "geometry Sphere {"+
-				"radius 1.0"+
+			    attributes.sizeTable.get(size)+
 			    "}"+
 			"}"+
 		    "]"+
 		"}");
 	
-	    //writer.close();
 		 System.out.println("Sphere drawn successfully!");	
 	}
 	
-	public void drawCylinder(String colour) throws IOException{
+	public void drawCylinder(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
-		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
-		//writer.println("#VRML V2.0 utf8");
+		attributes.initializeSizes("cylinder");
+
 		ObjectIdentifier.writer.println("Transform {"+
 		    "translation 0.0 0.615 0.0"+
 		    "children ["+
@@ -73,25 +73,21 @@ public class CodeGenerator {
 				" }"+
 			    "}"+
 			    "geometry Cylinder {"+
-			    " radius 1.0 "+
-			    "height 2.0 "+
-			    "side TRUE "+
-			    "bottom TRUE "+
-			    "top TRUE "+
+			    attributes.sizeTable.get(size)
+			    +
 			    "}"+
 			"}"+
 		    "]"+
 		"}");
 	
-	    //writer.close();
 		 System.out.println("Cylinder drawn successfully!");	
 	}
 	
-	public void drawCone(String colour) throws IOException{
+	public void drawCone(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
-		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
-		//writer.println("#VRML V2.0 utf8");
+		attributes.initializeSizes("cone");
+
 		ObjectIdentifier.writer.println("Transform {"+
 		    "translation 0.0 0.615 0.0"+
 		    "children ["+
@@ -102,25 +98,21 @@ public class CodeGenerator {
 				" }"+
 			    "}"+
 			    "geometry Cone {"+
-			    " bottomRadius 1.0 "+
-			    "height 2.0 "+
-			    "side TRUE "+
-			    "bottom TRUE "+
+			    attributes.sizeTable.get(size)
+			    +
 			    "}"+
 			"}"+
 		    "]"+
 		"}");
 	
-	    //writer.close();
 		 System.out.println("Cone drawn successfully!!");	
 	}
 	
 	//custom shapes
-	public void drawTable(String colour) throws IOException{
+	public void drawRoundTable(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
-		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
-		//writer.println("#VRML V2.0 utf8");
+
 		ObjectIdentifier.writer.println("Transform {"+
 		    "translation 0.0 0.615 0.0"+
 		    "children ["+
@@ -165,15 +157,63 @@ public class CodeGenerator {
 				"size 0.35 0.03 0.35" +
 			    "}}]}");
 	
-	    //writer.close();
 		System.out.println("Table drawn successfully!");	
 	}
 	
-	public void drawChair(String colour) throws IOException{
+	public void drawSquareTable(String colour, String size) throws IOException{
 		AttributeDefinitions attributes= new AttributeDefinitions();
 		attributes.initializeColours();
-		//PrintWriter writer = new PrintWriter("new5.wrl", "UTF-8");
-		//writer.println("#VRML V2.0 utf8");
+
+		ObjectIdentifier.writer.println("Transform {"+
+		    "translation 0.0 0.615 0.0"+
+		    "children ["+
+			"Shape {"+
+			    "appearance DEF " +colour+ " Appearance {"+
+				"material Material {"+
+				    "diffuseColor "+attributes.colourTable.get(colour)+
+				" }"+
+			    "}"+
+			    "geometry Box {"+
+			    " size 1.0 0.1 1.0 "+
+			    "}"+
+			"}"+
+		    "]"+
+		"}"+
+		"Transform {"+
+		    "translation 0.0 0.3075 0.0"+
+		    "children ["+
+			"Shape {"+
+			    "appearance USE "+ colour+
+			   " geometry Box {"+
+				"size 0.09 0.57 0.09"+
+			    "}"+
+			"}"+
+		    "]}"+
+		"Transform {"+
+		    "translation 0.0 0.015 0.0"+
+		    "children ["+
+			"Shape {"+
+			    "appearance USE "+ colour+
+			    " geometry Box {"+
+				"size 0.5 0.03 0.5"+
+			    "}"+
+			"}]}"+
+		"Transform {"+
+		    "translation 0.0 0.045 0.0"+
+		    "children ["+
+			"Shape {"+
+			    "appearance USE " +colour +
+			    " geometry Box {"+
+				"size 0.35 0.03 0.35" +
+			    "}}]}");
+	
+		System.out.println("Table drawn successfully!");	
+	}
+	
+	public void drawChair(String colour, String size) throws IOException{
+		AttributeDefinitions attributes= new AttributeDefinitions();
+		attributes.initializeColours();
+
 		ObjectIdentifier.writer.println("Transform {"+
 
 				    "translation 0.0 0.5 0.0 "+
@@ -246,7 +286,6 @@ public class CodeGenerator {
 					    "children [ USE BackPole ]"+
 					"}]}");
 	
-	    //writer.close();
 		 System.out.println("Chair drawn successfully!");	
 	}
 }
