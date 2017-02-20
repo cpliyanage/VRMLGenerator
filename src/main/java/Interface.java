@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JButton;
 
 import java.awt.Font;
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class Interface {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextArea textArea;
 	
 	POSTagger posTagger = new POSTagger();
 
@@ -50,10 +51,10 @@ public class Interface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(30, 61, 356, 64);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);		
+		textArea = new JTextArea();
+		textArea.setBounds(30, 61, 356, 64);
+		frame.getContentPane().add(textArea);
+		textArea.setColumns(10);		
 		
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -80,10 +81,10 @@ public class Interface {
 		btnGenerateVrml.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String input =textField.getText();
+				String input =textArea.getText();
 				System.out.println("User Input: " +input);
 				try {
-					String output= posTagger.tagContent(input);
+					String output=TaggerAndParser.tagContent(input);
 					lblNewLabel.setText(output);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -95,7 +96,7 @@ public class Interface {
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textField.setText("");
+				textArea.setText("");
 			}
 		});
 		

@@ -51,4 +51,34 @@ public class AttributeDefinitions {
 		   }*/
 
 	   }
+	   
+	   public String getLocation(String currentLocation , String relativeLocation){
+		   String newLocation;
+		   String arr[]=currentLocation.split(" ");
+		   double x = Double.parseDouble(arr[0]);
+		   double y = Double.parseDouble(arr[1]);
+		   double z = Double.parseDouble(arr[2]);
+		   if(relativeLocation.equals("left")){
+			   x=x-2;
+		   }
+		   else if(relativeLocation.equals("right")){
+			   x=x+2;
+		   }
+		   else if(relativeLocation.equals("above")){
+			   y=y+2;
+		   }
+		   else if(relativeLocation.equals("below")){
+			   y=y-2;
+		   }
+		   else if(relativeLocation.equals("front")){
+			   z=z+2;
+		   }
+		   else if(relativeLocation.equals("behind")){
+			   z=y-2;
+		   }
+		   
+		   newLocation = x+" "+y+" "+z;
+		   return newLocation;
+		   
+	   }
 }
