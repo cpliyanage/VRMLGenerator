@@ -29,7 +29,7 @@ public class TaggerAndParser {
 	public static String tagContent(String input) throws IOException{
 		
 		String output="";
-		String[] locations={"left","right","above","below","front","behind"};
+		String[] locations={"left","right","above","below","front","behind", "top" ,"under", "on"};
 		String[] objects = { "table", "chair", "box","cone","sphere", "cylinder"};
 		String[] attributes={"red", "green", "blue","brown","black", "white","small","regular","large","round","square"};
 		ArrayList<VRMLObject> objectArray = new ArrayList<VRMLObject>();
@@ -141,7 +141,7 @@ public class TaggerAndParser {
 			perfMon.incrementCounter();
 		}
 		perfMon.stopAndPrintFinalResult();
-		
+			output="Number of objects: "+ objectArray.size(); 
 			return output;
 		}
 	

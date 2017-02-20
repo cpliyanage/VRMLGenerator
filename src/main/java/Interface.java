@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Interface {
 
 	private JFrame frame;
-	private JTextArea textArea;
+	private JTextField textField;
 	
 	POSTagger posTagger = new POSTagger();
 
@@ -51,10 +51,10 @@ public class Interface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(30, 61, 356, 64);
-		frame.getContentPane().add(textArea);
-		textArea.setColumns(10);		
+		textField = new JTextField();
+		textField.setBounds(30, 61, 356, 64);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);		
 		
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -81,7 +81,7 @@ public class Interface {
 		btnGenerateVrml.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String input =textArea.getText();
+				String input =textField.getText();
 				System.out.println("User Input: " +input);
 				try {
 					String output=TaggerAndParser.tagContent(input);
@@ -96,7 +96,7 @@ public class Interface {
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textArea.setText("");
+				textField.setText("");
 			}
 		});
 		

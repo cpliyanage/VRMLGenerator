@@ -29,21 +29,9 @@ public class ObjectIdentifier {
 					}
 				}
 			}
-
-			if(!obj.name.equals(null)&& obj.name.equalsIgnoreCase("table")){
-				if(obj.attributes.size()>0 && obj.attributes.contains("round")){
-					System.out.println("Round table present");
-					codeGenerator.drawRoundTable(colour,size,obj.location);
-				}else if(obj.attributes.size()>0 && obj.attributes.contains("square")){
-					System.out.println("Square table present");
-					codeGenerator.drawSquareTable(colour,size,obj.location);
-				}else{
-					System.out.println("Object table present");
-					codeGenerator.drawRoundTable(colour,size,obj.location);
-				}
-			} 
 			
-			else if (!obj.name.equals(null) && obj.name.equalsIgnoreCase("box")){
+			//Basic shapes
+			if (!obj.name.equals(null) && obj.name.equalsIgnoreCase("box")){
 				System.out.println("Object box present");
 				currentLocation=codeGenerator.drawBox(colour,size,currentLocation,obj.location);
 			}
@@ -59,9 +47,24 @@ public class ObjectIdentifier {
 				System.out.println("Object cylinder present");
 				currentLocation=codeGenerator.drawCylinder(colour,size,currentLocation,obj.location);
 			}
+			
+			//Custom objects
+			else if(!obj.name.equals(null)&& obj.name.equalsIgnoreCase("table")){
+				if(obj.attributes.size()>0 && obj.attributes.contains("round")){
+					System.out.println("Round table present");
+					currentLocation=codeGenerator.drawRoundTable(colour,size,currentLocation,obj.location);
+				}else if(obj.attributes.size()>0 && obj.attributes.contains("square")){
+					System.out.println("Square table present");
+					currentLocation=codeGenerator.drawSquareTable(colour,size,currentLocation,obj.location);
+				}else{
+					System.out.println("Object table present");
+					currentLocation=codeGenerator.drawRoundTable(colour,size,currentLocation,obj.location);
+				}
+			} 
+			
 			else if(!obj.name.equals(null) && obj.name.equalsIgnoreCase("chair")){
 				System.out.println("Object chair present");
-				codeGenerator.drawChair(colour,size,obj.location);
+				currentLocation=codeGenerator.drawChair(colour,size,currentLocation,obj.location);
 			}
 		}
 		
